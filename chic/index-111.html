@@ -1,0 +1,148 @@
+
+<HTML>
+<HEAD>
+    <TITLE> CHIC Moscow Guide </TITLE>
+    <link rel="stylesheet" href="./css/styles.css">
+    <link rel="manifest" href="/manifest.json">
+    
+    <script>
+      if ('serviceWorker' in navigator) {
+        window.addEventListener('load', () => {
+          navigator.serviceWorker.register('/sw.js')
+            .then(registration => {
+              console.log('ServiceWorker registration successful');
+            })
+            .catch(err => {
+              console.log('ServiceWorker registration failed: ', err);
+            });
+        });
+      }
+    </script>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="theme-color" content="#000000"/>
+</HEAD>
+
+<body>
+    <div class="bg-image"></div>
+    
+    <button class="top-btn menu-btn" id="panelToggle">
+        <span></span>
+        <span></span>
+        <span></span>
+    </button>
+    
+    <a href="register.html" target="_blank" class="top-btn register-btn">SIGN IN</a>
+    <div class="side-panel" id="sidePanel">
+        <div class="panel-content">
+            <h3>Меню</h3>
+            <ul>
+                <li><a href="index-11.html">Главная</a></li>
+                <li><a href="map1.html">Карта заведений</a></li>
+                <li><a href="review.html">Отзывы</a></li>
+                <li><a href="contact.html">Контакты</a></li>
+                <li><a href="feedback.php">Обратная связь</a></li>
+            </ul>
+        </div>
+    </div>
+    <div class="overlay" id="overlay"></div>
+    
+    <div class="header">
+        <div class="logo">CHIC Moscow</div>
+        <div class="subtitle">Гид по самым вкусным местам Москвы</div>
+    </div>
+    
+    <div class="search-container">
+        <div class="search-bar">
+            <input type="text" class="search-input" placeholder="Найти заведения...">
+            <div class="search-icon"></div>
+            <div class="filter-icon">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </div>
+    
+    <div class="actual-section">Актуальное</div>
+    
+    <div class="establishments-container">
+        <!-- Bro&n -->
+        <div class="establishment-card">
+            <a href="https://bronrest.ru/" target="_blank">
+                <div class="establishment-image" style="background-image: url('images/bron.jpg')">
+                    <div class="image-overlay"></div>
+                    <div class="establishment-name">Bro&n</div>
+                </div>
+            </a>
+        </div>
+
+        <!-- Кофемания -->
+        <div class="establishment-card">
+            <a href="https://coffeemania.ru/" target="_blank">
+                <div class="establishment-image" style="background-image: url('images/coffeemania.jpg')">
+                    <div class="image-overlay"></div>
+                    <div class="establishment-name">Кофемания</div>
+                </div>
+            </a>
+        </div>
+
+        <!-- Мария Санта -->
+        <div class="establishment-card">
+            <a href="https://cafesanta.ru/rus/" target="_blank">
+                <div class="establishment-image" style="background-image: url('images/santa.jpg')">
+                    <div class="image-overlay"></div>
+                    <div class="establishment-name">Мария Санта</div>
+                </div>
+            </a>
+        </div>
+
+        <!-- DIDI -->
+        <div class="establishment-card">
+            <a href="https://tomesto.ru/moskva/places/didi?utm_campaign=msk_restorani_y_poisk&utm_content=52403848358%7Cret%7C52403848358%7Ccid%7C53234282%7Cgid%7C5466970713%7Caid%7C16294831023%7Cadp%7Cno%7Cpos%7Cpremium1%7Csrc%7Csearch_none%7Cdvc%7Cdesktop%7Creg%7CСочи%7C16294831023&utm_medium=cpc&utm_source=yandex&utm_term=didi%20ресторан&yclid=8589100378531823615" target="_blank">
+                <div class="establishment-image" style="background-image: url('images/DIDI.png')">
+                    <div class="image-overlay"></div>
+                    <div class="establishment-name">DIDI</div>
+                </div>
+            </a>
+        </div>
+    </div>
+    
+    <div id="feedback-widget">
+        <div>
+            Задайте нам вопросы!
+        </div>
+        <div>
+            <textarea id="feedback-message" placeholder="Ваш вопрос..."></textarea>
+            <form method="POST" action="save_feedback.php">
+                <textarea name="message" required></textarea>
+                <button type="submit">Отправить</button>
+            </form>
+        </div>
+    </div>
+
+    <div id="feedback-trigger">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>
+        </svg>
+    </div>
+
+    <script src="js/filters.js"></script>
+    <script src="js/menu.js"></script>
+    <script>
+        document.getElementById('feedback-trigger').addEventListener('click', function() {
+            const widget = document.getElementById('feedback-widget');
+            widget.style.display = widget.style.display === 'none' ? 'block' : 'none';
+        });
+        
+        document.addEventListener('click', function(e) {
+            const widget = document.getElementById('feedback-widget');
+            const trigger = document.getElementById('feedback-trigger');
+            
+            if (!widget.contains(e.target) && !trigger.contains(e.target)) {
+                widget.style.display = 'none';
+            }
+        });
+    </script>
+</body>
+</html>
